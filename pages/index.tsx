@@ -28,6 +28,7 @@ const Home: NextPage = () => {
                 <div className={"grow grid grid-cols-7 border-solid"}>
                     <WeekView since={since} until={until}/>
                     {Weekdays.map(day => (
+                        // eslint-disable-next-line react/jsx-key
                         <div className={"text-black"}>{day}</div>))
                     }
                 </div>

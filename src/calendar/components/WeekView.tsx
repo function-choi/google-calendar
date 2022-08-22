@@ -18,6 +18,7 @@ export default function WeekView({ since, until}: Props) {
     return (
         <>
             {dates.map((date) => (
+                // eslint-disable-next-line react/jsx-key
                 <DateCell date={date} />
             ))}
         {/*    TODO: 보여질 날짜가 바뀌면 다른 닐찌 집합을 보여준다. */}
