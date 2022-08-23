@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addDays, subDays} from "date-fns";
+import {addDays, subDays, addMonths, subMonths} from "date-fns";
 
 interface TCurrentDate {
     time : Date
@@ -18,6 +18,12 @@ const currentDate = createSlice({
         },
         prevWeek: state => {
              state.time = subDays(state.time, 7)
+        },
+        nextMonth: state => {
+            state.time = addMonths(state.time, 1)
+        },
+        prevMonth: state => {
+            state.time = subMonths(state.time, 1)
         }
     }
 })

@@ -1,15 +1,35 @@
 import {format} from "date-fns";
+import {addSchedule, deleteSchedule, updateSchedule, TSchedule,TScheduleDetail} from "../../../store/schedule"
+import {useSelector, useDispatch} from "react-redux";
+import {RootState} from "../../../store";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import {openModal} from "../../../store/modal";
+import ScheduleModal from "./ScheduleModal";
 
 type Props = {
     date : Date;
 }
 
+
+
 export default function DateCell({ date }:Props) {
-    console.log(date)
+    const dispatch = useDispatch()
+    const schedulesByDate = useSelector((state: RootState) => state.schedule)
+    // const dispatch = useDispatch()
+    const datestr = date.toLocaleDateString()
+    const schedules = schedulesByDate[datestr]
+    // const t = s.startTime.hour * 60 + s.startTime.minute
+    // const top = `${t}px`
+    // let h = (s.endTime.hour - s.startTime.hour) * 60 - s.startTime.minute + s.endTime.minute
+    // const height = `${h}px`
+
     return (
-        <span style={{ color: 'black'}}>
-            {format(date, 'yyyy-MM-dd')}
-        {/*    TODO: 날짜를 받으면 24시간짜리 스케쥴표를 보여준다. */}
-        </span>
+            <div onClick={ () => {{dispatch(openModal({date}))}}}>
+                {schedules?.map((schedule) => (
+                  <div key={schedule.id}>
+                      {schedule.title}
+                  </div>
+                ))}
+            </div>
     )
 }

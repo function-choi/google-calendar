@@ -1,7 +1,7 @@
 import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
 import {format} from "date-fns";
 
-interface TScheduleDetail {
+export interface TScheduleDetail {
     id: string
     title: string;
     startTime: { hour: number, minute: number };
@@ -11,7 +11,7 @@ interface TScheduleDetail {
     eventColor: string;
 }
 
-interface TSchedule {
+export interface TSchedule {
     [key: string]: TScheduleDetail[]
 }
 

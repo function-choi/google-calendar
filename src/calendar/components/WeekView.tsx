@@ -1,13 +1,14 @@
-import {useMemo} from "react";
+import React, {useMemo} from "react";
 import DateCell from "./DateCell";
-import {addDays, isBefore} from "date-fns";
+import {addDays, format, isBefore} from "date-fns";
 
 type Props = {
-    since : Date;
-    until : Date;
+    since: Date;
+    until: Date;
+    renderItem?(date: Date): React.ReactNode;
 }
 
-export default function WeekView({ since, until}: Props) {
+export default function WeekView({since, until, renderItem}: Props) {
     const dates = useMemo(() => {
         const currentDates = [];
         for (let i = since; isBefore(i, until); i = addDays(i, 1)) {
@@ -17,11 +18,13 @@ export default function WeekView({ since, until}: Props) {
     }, [since, until]);
     return (
         <>
-            {dates.map((date) => (
-                // eslint-disable-next-line react/jsx-key
-                <DateCell date={date} />
-            ))}
-        {/*    TODO: 보여질 날짜가 바뀌면 다른 닐찌 집합을 보여준다. */}
+            {dates.map((date) => renderItem ? <React.Fragment key={date.toLocaleDateString()}>{renderItem(date)}</React.Fragment> : (
+                    // eslint-disable-next-line react/jsx-key
+                    <span key={date.toLocaleDateString()} style={{color: 'black'}}>
+                    {format(date, 'MM-dd')}
+                 </span>)
+                /*    TODO: 날짜를 받으면 24시간짜리 스케쥴표를 보여준다. */
+            )}
         </>
     )
 }

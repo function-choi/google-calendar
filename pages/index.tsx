@@ -9,13 +9,16 @@ import {useSelector, useDispatch} from "react-redux";
 import {nextWeek, prevWeek} from "../store/calendar"
 import {RootState} from "../store"
 import {format} from "date-fns";
+import DateCell from "../src/calendar/components/DateCell";
+import ScheduleModal from "../src/calendar/components/ScheduleModal";
+import {ScheduleModalDate} from "../store/modal"
 
 
 const Home: NextPage = () => {
 
     const currentDate = useSelector((state: RootState) => state.currentDate.time)
     const dispatch = useDispatch()
-
+    const modalDate = useSelector((state: RootState) => state.modalSlice.ScheduleModalDate)
     const since = useMemo(() => startOfWeek(currentDate), [currentDate]);
     const until = useMemo(() => endOfWeek(currentDate), [currentDate]);
 
@@ -29,7 +32,7 @@ const Home: NextPage = () => {
                     <WeekView since={since} until={until}/>
                     {Weekdays.map(day => (
                         // eslint-disable-next-line react/jsx-key
-                        <div className={"text-black"}>{day}</div>))
+                        <div key={day.toString()} className={"text-black"}>{day}</div>))
                     }
                 </div>
             </div>
@@ -62,11 +65,12 @@ const Home: NextPage = () => {
                     <div className={"h-64"}></div>
                 </div>
                 <div className={"grow grid grid-cols-7"}>
-                    <WeekView since={since} until={until}/>
+                    <WeekView since={since} until={until} renderItem={date => <DateCell date={date} />} />
                 </div>
             </div>
+            <ScheduleModal setDate = {modalDate}/>
         </div>
-    )
+)
 }
 
 export default Home

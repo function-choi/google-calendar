@@ -3,8 +3,10 @@ import React from 'react';
 import type {AppProps} from 'next/app'
 import Head from "next/head";
 import Layout from "../src/common/components/Layout";
-import {store} from "../store"
-import {Provider} from "react-redux";
+import {RootState, store} from "../store"
+import {Provider, useSelector} from "react-redux";
+import ScheduleModal from "../src/calendar/components/ScheduleModal"
+
 
 function App({Component, pageProps}: AppProps) {
     return (
