@@ -32,7 +32,7 @@ const Home: NextPage = () => {
                     <WeekView since={since} until={until}/>
                     {Weekdays.map(day => (
                         // eslint-disable-next-line react/jsx-key
-                        <div key={day.toString()} className={"text-black"}>{day}</div>))
+                        <div key={day.toString()} className={"text-black border text-center"}>{day}</div>))
                     }
                 </div>
             </div>

@@ -20,7 +20,7 @@ export default function WeekView({since, until, renderItem}: Props) {
         <>
             {dates.map((date) => renderItem ? <React.Fragment key={date.toLocaleDateString()}>{renderItem(date)}</React.Fragment> : (
                     // eslint-disable-next-line react/jsx-key
-                    <span key={date.toLocaleDateString()} style={{color: 'black'}}>
+                    <span className={"border text-center"} key={date.toLocaleDateString()} style={{color: 'black'}}>
                     {format(date, 'MM-dd')}
                  </span>)
                 /*    TODO: 날짜를 받으면 24시간짜리 스케쥴표를 보여준다. */

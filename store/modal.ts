@@ -2,8 +2,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {TScheduleDetail} from "./schedule";
 
 interface TModal {
-    isScheduleModalOpen : boolean
-    ScheduleModalDate : Date
+    isScheduleModalOpen? : boolean
+    ScheduleModalDate? : Date
 }
 
 const  initialState : TModal = {
@@ -19,9 +19,8 @@ const modalSlice = createSlice({
             state.isScheduleModalOpen = true;
             state.ScheduleModalDate = action.payload.date;
         },
-        closeModal: (state, action: PayloadAction<{ date: Date}>) => {
+        closeModal: (state) => {
             state.isScheduleModalOpen = false;
-            state.ScheduleModalDate = action.payload.date
         }
     }
 })
