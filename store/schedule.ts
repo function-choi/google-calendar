@@ -8,29 +8,44 @@ export interface TScheduleDetail {
     endTime: { hour: number, minute: number };
     location: string;
     description: string;
-    eventColor: string;
 }
 
 export interface TSchedule {
     [key: string]: TScheduleDetail[]
 }
 
-const initialState: TSchedule = {};
+const initialState: TSchedule = {
+    '2022-08-25': [
+        {
+            id:'0',
+            title: 'coding',
+            startTime: {hour:21, minute:30},
+            endTime: {hour:22,minute:30},
+            location: 'Office',
+            description: 'codingcoding'
+        }
+    ]
+};
 
-const extractKey = (date: Date) => format(date, 'yyyy-mm-dd');
+const extractKey = (date: Date) => format(date, 'yyyy-MM-dd');
 
 const Schedule = createSlice({
     name: 'schedule',
     initialState,
     reducers: {
-        addSchedule: (state, action: PayloadAction<{ date: Date; data: Omit<TScheduleDetail, 'id'> }>) => {
+        addSchedule: (state, action: PayloadAction<{ date: string; data: Omit<TScheduleDetail, 'id'> }>) => {
             const {date, data} = action.payload;
+            console.log("Hello woohyeok")
             const newDetail: TScheduleDetail = {...data, id: nanoid()};
-            state[extractKey(date)].push(newDetail);
+            const currentDate = new Date(date);
+            state[extractKey(currentDate)]= state[extractKey(currentDate)] || []
+            state[extractKey(currentDate)].push(newDetail);
+            console.log(state, data)
         },
-        deleteSchedule: (state, action: PayloadAction<{ date: Date; data: TScheduleDetail }>) => {
+        deleteSchedule: (state, action: PayloadAction<{ date: string; data: TScheduleDetail }>) => {
             const {date, data} = action.payload;
-            state[extractKey(date)] = state[extractKey(date)].filter((state) => state.id !== data.id)
+            const currentDate = new Date(date);
+            state[extractKey(currentDate)] = state[extractKey(currentDate)].filter((state) => state.id !== data.id)
         },
         updateSchedule: (state, action: PayloadAction<{ date: Date; data: TScheduleDetail }>) => {
             const {date, data} = action.payload;

@@ -37,7 +37,6 @@ const Home: NextPage = () => {
                 </div>
             </div>
             <div className={"flex h-5/6 w-full"}>
-
                 <div className={"w-16 border flex flex-col text-black"}>
                     <div className={"h-64"}>1AM</div>
                     <div className={"h-64"}>2AM</div>
@@ -64,13 +63,13 @@ const Home: NextPage = () => {
                     <div className={"h-64"}>11PM</div>
                     <div className={"h-64"}></div>
                 </div>
-                <div className={"grow grid grid-cols-7"}>
-                    <WeekView since={since} until={until} renderItem={date => <DateCell date={date} />} />
+                <div className={"grow grid grid-cols-7"} style={{ position: 'relative' }}>
+                    <WeekView since={since} until={until} renderItem={date => <DateCell date={date}/>}/>
                 </div>
             </div>
-            <ScheduleModal setDate = {modalDate}/>
+            <ScheduleModal setDate={modalDate}/>
         </div>
-)
+    )
 }
 
 export default Home
