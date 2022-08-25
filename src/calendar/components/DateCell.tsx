@@ -4,8 +4,6 @@ import {useSelector, useDispatch} from "react-redux";
 import {RootState} from "../../../store";
 import React, {Dispatch, SetStateAction, useCallback, useEffect, useState} from 'react'
 import {openModal} from "../../../store/modal";
-import ScheduleModal from "./ScheduleModal";
-import {Button} from "@mui/material";
 
 type Props = {
     date: Date;
@@ -14,12 +12,8 @@ type Props = {
 export default function DateCell({date}: Props) {
 
     const calculateHeight = (schedule: TScheduleDetail) => {
-        const t = (schedule.startTime.hour * 60 + schedule.startTime.minute) / 60 * 34.61 + 34.61 + 200
         const top = `${schedule.startTime.hour/24  * 100}%`
-        // let h = ((schedule.endTime.hour - schedule.startTime.hour) * 60 - schedule.endTime.minute + schedule.startTime.minute) / 60 * 34.61
         const height = `${(schedule.endTime.hour - schedule.startTime.hour) / 24 * 100}%`;
-        // if (h < 20) h = 20
-        // const height = `${h}px`
         return {top: top, height: height}
     }
     const dispatch = useDispatch()
@@ -44,7 +38,7 @@ export default function DateCell({date}: Props) {
                          style={{top: calculateHeight(schedule).top, height: calculateHeight(schedule).height, width: `${1/7 * 100}%`}}>
                         <div className={"flex flex-row place-content-between"}>
                             <div className={"mx-8"}>{schedule.title}</div>
-                            <button className = "bg-white text-blue-400 mx-8 rounded-full" onClick={(e) => handleDeleteSchedule(e, schedule)}>X</button>
+                            <button className = "bg-white text-blue-400 mx-8 h-8 rounded-full" onClick={(e) => handleDeleteSchedule(e, schedule)}>X</button>
                         </div>
                     </div>
                 </div>

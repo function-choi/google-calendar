@@ -50,7 +50,7 @@ export default function ScheduleModal(setDate: Props) {
         setLocation('');
         setDescription('');
         setStartTime('');
-
+        setEndTime('');
         dispatch(closeModal());
     }
     return (

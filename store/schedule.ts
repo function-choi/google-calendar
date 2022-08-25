@@ -35,12 +35,10 @@ const Schedule = createSlice({
     reducers: {
         addSchedule: (state, action: PayloadAction<{ date: string; data: Omit<TScheduleDetail, 'id'> }>) => {
             const {date, data} = action.payload;
-            console.log("Hello woohyeok")
             const newDetail: TScheduleDetail = {...data, id: nanoid()};
             const currentDate = new Date(date);
             state[extractKey(currentDate)]= state[extractKey(currentDate)] || []
             state[extractKey(currentDate)].push(newDetail);
-            console.log(state, data)
         },
         deleteSchedule: (state, action: PayloadAction<{ date: string; data: TScheduleDetail }>) => {
             const {date, data} = action.payload;
