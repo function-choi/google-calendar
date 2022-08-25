@@ -66,9 +66,9 @@ export default function ScheduleModal(setDate: Props) {
                 <br/>
                 <span>{format(modalDate, "yyyy/MM/dd (eee)")}</span>
                 <br/>
-                <input  type="time" value={startTime} onChange={(e) => setStartTime(e.currentTarget.value)} />
+                <input  type="time" style = {{background : '#ffffff'}} value={startTime} onChange={(e) => setStartTime(e.currentTarget.value)} />
                 <span>~</span>
-                <input type="time" value={endTime} onChange={(e) => setEndTime(e.currentTarget.value)} />
+                <input type="time" style = {{background : '#ffffff'}}  value={endTime} onChange={(e) => setEndTime(e.currentTarget.value)} />
 
                 <TextField id="standard-basic" label="Add location" variant="standard" value={location}
                            onChange={e => setLocation(e.target.value)}/>

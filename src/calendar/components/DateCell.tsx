@@ -5,6 +5,7 @@ import {RootState} from "../../../store";
 import React, {Dispatch, SetStateAction, useCallback, useEffect, useState} from 'react'
 import {openModal} from "../../../store/modal";
 import ScheduleModal from "./ScheduleModal";
+import {Button} from "@mui/material";
 
 type Props = {
     date: Date;
@@ -26,7 +27,6 @@ export default function DateCell({date}: Props) {
     // const dispatch = useDispatch()
     const datestr = format(date, 'yyyy-MM-dd')
     const schedules = schedulesByDate[datestr]
-    console.log(schedules, schedulesByDate, datestr)
 
     const handleDeleteSchedule = useCallback((e: React.MouseEvent, schedule: TScheduleDetail) => {
         e.stopPropagation();
@@ -40,10 +40,12 @@ export default function DateCell({date}: Props) {
         }}>
             {schedules?.map((schedule) => (
                 <div key={schedule.id}>
-                    <div className={"absolute text-white border text-center bg-gray-400"}
+                    <div className={"absolute text-white border text-center bg-blue-400"}
                          style={{top: calculateHeight(schedule).top, height: calculateHeight(schedule).height, width: `${1/7 * 100}%`}}>
-                        {schedule.title}
-                        <button onClick={(e) => handleDeleteSchedule(e, schedule)}>X</button>
+                        <div className={"flex flex-row place-content-between"}>
+                            <div className={"mx-8"}>{schedule.title}</div>
+                            <button className = "bg-white text-blue-400 mx-8 rounded-full" onClick={(e) => handleDeleteSchedule(e, schedule)}>X</button>
+                        </div>
                     </div>
                 </div>
             ))}

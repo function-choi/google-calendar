@@ -15,14 +15,14 @@ export interface TSchedule {
 }
 
 const initialState: TSchedule = {
-    '2022-08-25': [
+    '2020-08-25': [
         {
             id:'0',
             title: 'coding',
             startTime: {hour:21, minute:30},
             endTime: {hour:22,minute:30},
             location: 'Office',
-            description: 'codingcoding'
+            description: 'coding'
         }
     ]
 };
